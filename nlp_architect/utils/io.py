@@ -31,6 +31,8 @@ from tqdm import tqdm
 
 from nlp_architect.utils.generic import license_prompt
 
+import urllib.request
+
 
 def download_unlicensed_file(url, sourcefile, destfile, totalsz=None):
     """
