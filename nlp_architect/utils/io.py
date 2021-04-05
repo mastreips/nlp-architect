@@ -56,10 +56,17 @@ def download_unlicensed_file(url, sourcefile, destfile, totalsz=None):
         nchunks = totalsz // chunksz
 
     print("Downloading file to: {}".format(destfile))
-    with open(destfile, "wb") as f:
-        for data in tqdm(req.iter_content(chunksz), total=nchunks, unit="MB", file=sys.stdout):
-            f.write(data)
-    print("Download Complete")
+    # with open(destfile, "wb") as f:
+    #     for data in tqdm(req.iter_content(chunksz), total=nchunks, unit="MB", file=sys.stdout):
+    #         f.write(data)
+    # print("Download Complete")
+
+    remote = urllib.request.urlopen(url)
+    data = remote.read()
+    remote.close()
+    local = open(destfile, 'wb')
+    local.write(data)
+    local.close()
 
 
 def uncompress_file(filepath: str or os.PathLike, outpath="."):
